@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes gradient-shift {
+  0% {
+    transform: translateX(-50%) translateY(-50%);
+  }
+  50% {
+    transform: translateX(50%) translateY(50%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 15s ease infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-scroll {
+  animation: scroll 20s linear infinite;
+  animation-play-state: running;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Faster animation for mobile devices */
+@media (max-width: 768px) {
+  .logo-scroll {
+    animation-duration: 8s;
+  }
+}
+
+/* Pause animation on hover */
+.logo-scroll:hover {
+  animation-play-state: paused;
+}
+
+@layer base {
+  html, body {
+    @apply overflow-x-hidden;
+    max-width: 100%;
+  }
+
+  body {
+    @apply bg-gradient-to-b from-blue-50 to-white min-h-screen;
+  }
+}
+
+@layer components {
+  .backdrop-blur-3xl {
+    backdrop-filter: blur(64px);
+  }
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent 70%
+  );
+}
+
+/* Optimize animations */
+.will-change-transform {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
